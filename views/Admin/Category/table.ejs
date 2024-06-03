@@ -1,0 +1,32 @@
+<div class="col-md-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Category</h3>
+        </div> <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">No</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < category.length; i++){ %>
+                    <tr class="align-middle">
+                        <td><%= i+1 %></td>
+                        <td><%= category[i].name %></td>
+                        <td>
+                            <form action="/category/<%= category[i]._id %>?_method=DELETE" method="POST">
+                                <a class="btn btn-warning" href="/category/update/<%= category[i]._id %>">Update</a>
+                                <button class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+</div>
