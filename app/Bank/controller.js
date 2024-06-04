@@ -1,4 +1,4 @@
-const Category = require('./model')
+const Bank = require('./model')
 
 module.exports={
     index: async(req, res)=>{
@@ -7,48 +7,49 @@ module.exports={
             const alertStatus = req.flash('alertStatus')
 
             const alert = {message: alertMessage, status: alertStatus}
-            const category  = await Category.find()
+            const bank  = await Bank.find()
+
             console.log(alert)
-            res.render('Admin/Category/index', {
-                category,
+            res.render('Admin/Bank/index', {
+                bank,
                 alert
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/category')
+            res.redirect('/bank')
         }
     },
 
     view_update: async(req, res)=>{
         try {
             const {id} = req.params
-            const category = await Category.findOne({_id: id})
+            const bank = await Bank.findOne({_id: id})
 
-            res.render('Admin/Category/update',{
-                category
+            res.render('Admin/Bank/update',{
+                bank
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/category')
+            res.redirect('/bank')
         }
     },
 
     actionCreate: async(req, res)=>{
         try {
             const {name} = req.body
-            let category = await Category({name})
-            await category.save()
+            let bank = await Bank({name})
+            await bank.save()
 
-            req.flash('alertMessage', 'Add category successfuly')
+            req.flash('alertMessage', 'Add bank successfuly')
             req.flash('alertStatus', 'success')
 
-            res.redirect('/category')
+            res.redirect('/bank')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/category')
+            res.redirect('/bank')
         }
     },
 
@@ -59,20 +60,19 @@ module.exports={
             const {name} = req.body
 
             
-            let category = await Category.findOneAndUpdate({
+            let bank = await Bank.findOneAndUpdate({
                 _id: id
             },{
                 name
             })
-            console.log(category)
-            req.flash('alertMessage', 'Update category successfuly')
+            req.flash('alertMessage', 'Update bank successfuly')
             req.flash('alertStatus', 'success')
             
-            res.redirect('/category')
+            res.redirect('/bank')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/category')
+            res.redirect('/bank')
         }
     },
 
@@ -80,15 +80,15 @@ module.exports={
         try {
             
             const {id} = req.params
-            let category = await Category.findOneAndDelete({_id:id})
+            let bank = await Bank.findOneAndDelete({_id:id})
 
-            req.flash('alertMessage', 'Remove category successfuly')
+            req.flash('alertMessage', 'Remove bank successfuly')
             req.flash('alertStatus', 'success')
-            res.redirect('/category')
+            res.redirect('/bank')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/category')
+            res.redirect('/bank')
         }
     },
 

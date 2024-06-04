@@ -1,0 +1,45 @@
+<%- include ../../Partials/Header.ejs %>
+<%- include ../../Partials/Navbar.ejs %>
+<%- include ../../Partials/Sidebar.ejs %>
+<main class="app-main"> <!--begin::App Content Header-->
+  <div class="app-content-header"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+              <div class="col-sm-6">
+                  <h3 class="mb-0">Bank</h3>
+              </div>
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="/bank">Bank</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Update</li>
+                  </ol>
+              </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content Header--> <!--begin::App Content-->
+  <div class="app-content"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+            <div class="col-md-6"> <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+                    <div class="card-header">
+                        <div class="card-title">Bank Update</div>
+                    </div> <!--end::Header--> <!--begin::Form-->
+                    <form action="/bank/update/<%= bank._id %>?_method=PUT" method="POST"> <!--begin::Body-->
+                        <div class="card-body">
+                            <div class="form-group"> 
+                                <label for="name" class="form-label">Bank Name</label> 
+                                <input type="text" placeholder="<%= bank.name %>" class="form-control" name="name" id="name" required>
+                            </div>
+                        </div> <!--end::Body--> <!--begin::Footer-->
+                        <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+                    </form> <!--end::Form-->
+                </div> <!--end::Quick Example--> <!--begin::Input Group-->
+            </div> <!--end::Col--> <!--begin::Col-->  
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+</main>
+<%- include ../../Partials/Footer.ejs %>
+<%- include ../../Partials/js.ejs %>
