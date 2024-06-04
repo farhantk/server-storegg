@@ -1,4 +1,4 @@
-const Bank = require('./model')
+const Nominal = require('./model')
 
 module.exports={
     index: async(req, res)=>{
@@ -7,49 +7,49 @@ module.exports={
             const alertStatus = req.flash('alertStatus')
 
             const alert = {message: alertMessage, status: alertStatus}
-            const bank  = await Bank.find()
 
+            const nominal  = await Nominal.find()
             console.log(alert)
-            res.render('Admin/Bank/index', {
-                bank,
+            res.render('Admin/Nominal/index', {
+                nominal,
                 alert
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         }
     },
 
     view_update: async(req, res)=>{
         try {
             const {id} = req.params
-            const bank = await Bank.findOne({_id: id})
+            const nominal = await Nominal.findOne({_id: id})
 
-            res.render('Admin/Bank/update',{
-                bank
+            res.render('Admin/Nominal/update',{
+                nominal
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         }
     },
 
     actionCreate: async(req, res)=>{
         try {
-            const {name, ownerName, accNumber} = req.body
-            let bank = await Bank({name, ownerName, accNumber})
-            await bank.save()
+            const {name, quantity, price} = req.body
+            let nominal = await Nominal({name, quantity, price})
+            await nominal.save()
 
-            req.flash('alertMessage', 'Add bank successfuly')
+            req.flash('alertMessage', 'Add nominal successfuly')
             req.flash('alertStatus', 'success')
 
-            res.redirect('/bank')
+            res.redirect('/nominal')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         }
     },
 
@@ -57,22 +57,23 @@ module.exports={
         try {
             
             const {id} = req.params
-            const {name, ownerName, accNumber} = req.body
+            const {name, quantity, price} = req.body
 
             
-            let bank = await Bank.findOneAndUpdate({
+            let nominal = await Nominal.findOneAndUpdate({
                 _id: id
             },{
-                name, ownerName, accNumber
+                name, quantity, price
             })
-            req.flash('alertMessage', 'Update bank successfuly')
+            console.log(nominal)
+            req.flash('alertMessage', 'Update nominal successfuly')
             req.flash('alertStatus', 'success')
             
-            res.redirect('/bank')
+            res.redirect('/nominal')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         }
     },
 
@@ -80,15 +81,15 @@ module.exports={
         try {
             
             const {id} = req.params
-            let bank = await Bank.findOneAndDelete({_id:id})
+            let nominal = await Nominal.findOneAndDelete({_id:id})
 
-            req.flash('alertMessage', 'Remove bank successfuly')
+            req.flash('alertMessage', 'Remove nominal successfuly')
             req.flash('alertStatus', 'success')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/nominal')
         }
     },
 

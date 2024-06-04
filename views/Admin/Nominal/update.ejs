@@ -1,0 +1,69 @@
+<%- include ../../Partials/Header.ejs %>
+<%- include ../../Partials/Navbar.ejs %>
+<%- include ../../Partials/Sidebar.ejs %>
+<main class="app-main"> <!--begin::App Content Header-->
+  <div class="app-content-header"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+              <div class="col-sm-6">
+                  <h3 class="mb-0">Nominal</h3>
+              </div>
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="/nominal">Nominal</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Update</li>
+                  </ol>
+              </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content Header--> <!--begin::App Content-->
+  <div class="app-content"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+            <div class="col-md-6"> <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+                    <div class="card-header">
+                        <div class="card-title">Nominal Update</div>
+                    </div> <!--end::Header--> <!--begin::Form-->
+                    <form action="/nominal/update/<%= nominal._id %>?_method=PUT" method="POST"> <!--begin::Body-->
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-group"> 
+                                    <label for="name" class="form-label">Nominal Name</label> 
+                                    <select class="form-select" id="name" name="name" required>
+                                        <option value="Gold"
+                                        <% if(nominal.name === "Glod"){ %>
+                                            selected
+                                        <% } %>
+                                        >Gold</option>
+                                        <option value="Diamond"
+                                        <% if(nominal.name === "Diamond"){ %>
+                                            selected
+                                        <% } %>
+                                        >Diamond</option>
+                                        <option value="Jewel"
+                                        <% if(nominal.name === "Jewel"){ %>
+                                            selected
+                                        <% } %>
+                                        >Jewel</option>
+                                    </select>
+                
+                                    <label for="quantity" class="form-label">Quantity</label> 
+                                    <input type="number" class="form-control" name="quantity" id="quantity" required placeholder="<%= nominal.quantity %>">
+                
+                                    <label for="price" class="form-label">Price</label> 
+                                    <input type="number" class="form-control" name="price" id="price" required placeholder="<%= nominal.price %>">
+                                </div>
+                            </div>
+                        </div> <!--end::Body--> <!--begin::Footer-->
+                        <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+                    </form> <!--end::Form-->
+                </div> <!--end::Quick Example--> <!--begin::Input Group-->
+            </div> <!--end::Col--> <!--begin::Col-->  
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+</main>
+<%- include ../../Partials/Footer.ejs %>
+<%- include ../../Partials/js.ejs %>

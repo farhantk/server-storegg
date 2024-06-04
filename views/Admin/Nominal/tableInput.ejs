@@ -1,0 +1,27 @@
+<div class="col-md-6"> <!--begin::Quick Example-->
+    <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+        <div class="card-header">
+            <div class="card-title">Nominal Input</div>
+        </div> <!--end::Header--> <!--begin::Form-->
+        <form action="/nominal" method="POST"> <!--begin::Body-->
+            <div class="card-body">
+                <div class="form-group"> 
+                    <label for="name" class="form-label">Nominal Name</label> 
+                    <select class="form-select" id="name" name="name" required>
+                        <option selected disabled>Coin name</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Diamond">Diamond</option>
+                        <option value="Jewel">Jewel</option>
+                    </select>
+
+                    <label for="quantity" class="form-label">Quantity</label> 
+                    <input type="number" class="form-control" name="quantity" id="quantity" required>
+
+                    <label for="price" class="form-label">Price</label> 
+                    <input type="number" class="form-control" name="price" id="price" required>
+                </div>
+            </div> <!--end::Body--> <!--begin::Footer-->
+            <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+        </form> <!--end::Form-->
+    </div> <!--end::Quick Example--> <!--begin::Input Group-->
+</div> <!--end::Col--> <!--begin::Col-->
