@@ -10,11 +10,11 @@ let paymentSchema = mongoose.Schema({
         enum: ['Y', 'N'],
         default: 'Y'
     },
-    accNumber:{
+    accNumber:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bank'
 
-    }
+    }]
 })
 
 module.exports = mongoose.model('Payment', bankSchema)
