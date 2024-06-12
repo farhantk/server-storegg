@@ -5,6 +5,6 @@ let categorySchema = mongoose.Schema({
         type: String,
         require: [true, 'Please fill category name']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Category', categorySchema)

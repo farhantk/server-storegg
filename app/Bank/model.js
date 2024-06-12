@@ -13,6 +13,6 @@ let bankSchema = mongoose.Schema({
         type: String,
         require: [true, 'Please fill account number']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Bank', bankSchema)

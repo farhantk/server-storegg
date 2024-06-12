@@ -1,0 +1,51 @@
+<div class="col-md-6"> <!--begin::Quick Example-->
+    <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+        <div class="card-header">
+            <div class="card-title">Voucher Input</div>
+        </div> <!--end::Header--> <!--begin::Form-->
+        <form action="/voucher" method="POST" enctype="multipart/form-data"> <!--begin::Body-->
+            <div class="card-body">
+                <div class="form-group"> 
+                    <label for="name" class="form-label">Name</label> 
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="form-group"> 
+                    <label for="category" class="form-label">Category</label> 
+                    <select class="form-select" id="category" name="category" required>
+                        <option selected disabled>Select category</option>
+                        <% category.forEach(category=>{ %>
+                            <option value="<%= category._id %>"><%= category.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="multiple-select-field" class="form-label">Nominal</label>
+                    <div class="select2-purple">
+                        <select multiple="multiple" class="form-control select2" id="multiple-select-field" name="nominals" data-placeholder="Select nominal" required>
+                            <option disabled>Select nominal</option>
+                            <% nominal.forEach(nominal => { %>
+                                <option value="<%= nominal._id %>"><%= nominal.name %> <%= nominal.quantity %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group"> 
+                    <label for="image">Thumbnail</label> <br>
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div>
+                          <span class="btn btn-outline-secondary btn-file">
+                            <span class="fileinput-new">Select image</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="image" required>
+                          </span>
+                          <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                        </div>
+                        <div class="fileinput-preview img-thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                    </div>
+                </div>
+            </div> <!--end::Body--> <!--begin::Footer-->
+            <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+        </form> <!--end::Form-->
+    </div> <!--end::Quick Example--> <!--begin::Input Group-->
+</div> <!--end::Col--> <!--begin::Col-->

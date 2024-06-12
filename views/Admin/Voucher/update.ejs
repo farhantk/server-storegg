@@ -1,0 +1,91 @@
+<%- include ../../Partials/Header.ejs %>
+<%- include ../../Partials/Navbar.ejs %>
+<%- include ../../Partials/Sidebar.ejs %>
+<main class="app-main"> <!--begin::App Content Header-->
+  <div class="app-content-header"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+              <div class="col-sm-6">
+                  <h3 class="mb-0">Nominal</h3>
+              </div>
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="/voucher">Nominal</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Update</li>
+                  </ol>
+              </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content Header--> <!--begin::App Content-->
+  <div class="app-content"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+            <div class="col-md-6"> <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+                    <div class="card-header">
+                        <div class="card-title">Voucher Update</div>
+                    </div> <!--end::Header--> <!--begin::Form-->
+                    <form action="/voucher/update/<%= voucher._id %>?_method=PUT" method="POST" enctype="multipart/form-data"> <!--begin::Body-->
+                        <div class="card-body">
+                            <div class="form-group"> 
+                                <label for="name" class="form-label">Name</label> 
+                                <input type="text" class="form-control" name="name" id="name" value="<%= voucher.name %>" required>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="category" class="form-label">Category</label> 
+                                <select class="form-select" id="category" name="category" required>
+                                    <option selected disabled>Select category</option>
+                                    <% category.forEach(category=>{ %>
+                                        <option value="<%= category._id %>"
+                                            <% if(category._id.toString() === voucher?.category?._id.toString()){ %>
+                                                selected
+                                            <% } %>
+                                            ><%= category.name %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="multiple-select-field" class="form-label">Nominal</label>
+                                <div class="select2-purple">
+                                    <select multiple="multiple" class="form-control select2" id="multiple-select-field" name="nominals" data-placeholder="Select nominal" required>
+                                        <option disabled>Select nominal</option>
+                                        <% nominal.forEach(nominal => { %>
+                                            <option value="<%= nominal._id %>"
+                                                <% voucher.nominals.forEach(voucherNominal =>{ %>
+                                                    <% if(nominal._id.toString() === voucherNominal._id.toString()){ %>
+                                                        selected
+                                                    <% } %>
+                                                <% }) %>
+                                                ><%= nominal.name %> <%= nominal.quantity %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="image">Thumbnail</label> <br>
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div>
+                                    <img src="/uploads/<%= voucher.thumbnail %>" style="width: 50%; height: 50%;"><br>
+                                      <span class="btn btn-outline-secondary btn-file">
+                                        <span class="fileinput-new">Select image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="image" required>
+                                      </span>
+                                      <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                    <div class="fileinput-preview img-thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                </div>
+                            </div>
+                        </div> <!--end::Body--> <!--begin::Footer-->
+                        <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+                    </form> <!--end::Form-->
+                </div> <!--end::Quick Example--> <!--begin::Input Group-->
+            </div> <!--end::Col--> <!--begin::Col-->  
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+</main>
+<%- include ../../Partials/Footer.ejs %>
+<%- include ../../Partials/js.ejs %>

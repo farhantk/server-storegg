@@ -1,0 +1,103 @@
+<%- include ../../Partials/Header.ejs %>
+<%- include ../../Partials/Navbar.ejs %>
+<%- include ../../Partials/Sidebar.ejs %>
+<main class="app-main"> <!--begin::App Content Header-->
+  <div class="app-content-header"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+        <%- include ../../Partials/Message.ejs %>
+          <div class="row">
+              <div class="col-sm-6">
+                  <h3 class="mb-0">Transaction</h3>
+              </div>
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Transaction</li>
+                  </ol>
+              </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content Header--> <!--begin::App Content-->
+  <div class="app-content"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment</h3>
+                    </div> <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">No</th>
+                                    <th>Game name</th>
+                                    <th>Item</th>
+                                    <th>Status</th>
+                                    <th>Total price</th>
+                                    <th>Player name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i = 0; i < transaction.length; i++){ %>
+                                <tr class="align-middle">
+                                    <td><%= i+1 %></td>
+                                    <td>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <img width="48px" height="48px" src="/uploads/<%= transaction[i]?.historyVoucherTopup?.thumbnail %>" alt="">
+                                            </li>
+                                        </ul>
+                                        <%= transaction[i]?.historyVoucherTopup?.gameName %>
+                                        <br>
+                                        <%= transaction[i]?.historyVoucherTopup?.category %>
+                                    </td>
+                                    <td>
+                                        <%= transaction[i]?.historyVoucherTopup?.quantity %>
+                                        <%= transaction[i]?.historyVoucherTopup?.coinName %>
+                                    </td>
+                                    <td>
+                                        <%= transaction[i].value %>
+                                    </td>
+                                    <td>
+                                        <% if(transaction[i].status === 'pending') {%>
+                                            <span class="badge text-bg-warning">
+                                                <%= transaction[i].status %>
+                                            </span>
+                                        <% }else if(transaction[i].status === 'success'){ %>
+                                            <span class="badge text-bg-success">
+                                                <%= transaction[i].status %>
+                                            </span>
+                                        <% }else{ %>
+                                            <span class="badge text-bg-danger">
+                                                <%= transaction[i].status %>
+                                            </span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <%= transaction[i].player?.name ?? '-'%>
+                                    </td>
+                                    <td>
+                                        <% if(transaction[i].status === 'pending'){%>
+                                            <form action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT" method="POST"  style="display: inline-block">
+                                                <button class="btn btn-success btn-sm">Accept</button>
+                                            </form>
+                                            <form action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT" method="POST"  style="display: inline-block">
+                                                <button class="btn btn-danger btn-sm">Refuse</button>
+                                            </form>
+                                        <% }%>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div> <!-- /.card-body -->
+                </div> <!-- /.card -->
+            </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+</main>
+<%- include ../../Partials/Footer.ejs %>
+<%- include ../../Partials/js.ejs %>

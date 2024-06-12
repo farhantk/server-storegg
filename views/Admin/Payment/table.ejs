@@ -1,0 +1,40 @@
+<div class="col-md-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Payment</h3>
+        </div> <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">No</th>
+                        <th>Type</th>
+                        <th>Bank</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < payment.length; i++){ %>
+                    <tr class="align-middle">
+                        <td><%= i+1 %></td>
+                        <td><%= payment[i].type %></td>
+                        <td>
+                            <% payment[i].banks.forEach(bank=> {%>
+                                <span class="badge text-bg-primary" style="display: inline-block">
+                                    <%= bank.name %> - <%= bank.ownerName %> - <%= bank.accNumber %>
+                                </span>
+                            <% }) %>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" href="/payment/update/<%= payment[i]._id %>">Update</a>
+                            <form action="/payment/<%= payment[i]._id %>?_method=DELETE" method="POST"  style="display: inline-block">
+                                <button class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+</div>

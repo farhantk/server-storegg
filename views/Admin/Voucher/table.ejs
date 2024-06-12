@@ -1,0 +1,61 @@
+<div class="col-md-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Voucher</h3>
+        </div> <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">No</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Nominals</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < voucher.length; i++){ %>
+                    <tr class="align-middle">
+                        <td><%= i+1 %></td>
+                        <td><%= voucher[i].name %></td>
+                        <td><%= voucher[i].category.name %></td>
+                        <td>
+                            <% voucher[i].nominals.forEach(nominal=> {%>
+                                <span class="badge text-bg-primary">
+                                    <%= nominal.name %> <%= nominal.quantity %>
+                                </span>
+                            <% }) %>
+                        </td>
+                        <td>
+                            <% if(voucher[i].status === 'Y') {%>
+                                <span class="badge text-bg-success">
+                                    Active
+                                </span>
+                            <% }else{ %>
+                                <span class="badge text-bg-danger">
+                                    Inactive
+                                </span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <form action="/voucher/updateStatus/<%= voucher[i]._id %>?_method=PUT" method="POST" style="display: inline-block">
+                                <% if(voucher[i].status === 'Y') {%>
+                                    <button class="btn btn-primary btn-sm">Deactivate</button>
+                                <% }else{ %>
+                                    <button class="btn btn-primary btn-sm">Activate</button>
+                                <% } %>
+                            </form>
+                            <a class="btn btn-warning btn-sm" href="/voucher/update/<%= voucher[i]._id %>">Update</a>
+                            <form action="/voucher/<%= voucher[i]._id %>?_method=DELETE" method="POST"  style="display: inline-block">
+                                <button class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+</div>

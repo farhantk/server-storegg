@@ -11,6 +11,8 @@ module.exports={
 
             console.log(alert)
             res.render('Admin/Bank/index', {
+                name: req.session.user.name,
+                title: 'bank',
                 bank,
                 alert
             });
@@ -27,6 +29,8 @@ module.exports={
             const bank = await Bank.findOne({_id: id})
 
             res.render('Admin/Bank/update',{
+                name: req.session.user.name,
+                title: 'Bank',
                 bank
             });
         } catch (err) {

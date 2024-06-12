@@ -11,6 +11,8 @@ module.exports={
             const nominal  = await Nominal.find()
             console.log(alert)
             res.render('Admin/Nominal/index', {
+                name: req.session.user.name,
+                title: 'Nominal',
                 nominal,
                 alert
             });
@@ -27,6 +29,8 @@ module.exports={
             const nominal = await Nominal.findOne({_id: id})
 
             res.render('Admin/Nominal/update',{
+                name: req.session.user.name,
+                title: 'Nominal',
                 nominal
             });
         } catch (err) {

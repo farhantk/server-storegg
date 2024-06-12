@@ -10,6 +10,8 @@ module.exports={
             const category  = await Category.find()
             console.log(alert)
             res.render('Admin/Category/index', {
+                name: req.session.user.name,
+                title: 'Category',
                 category,
                 alert
             });
@@ -26,6 +28,8 @@ module.exports={
             const category = await Category.findOne({_id: id})
 
             res.render('Admin/Category/update',{
+                name: req.session.user.name,
+                title: 'Category',
                 category
             });
         } catch (err) {

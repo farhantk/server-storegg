@@ -1,0 +1,60 @@
+<%- include ../../Partials/Header.ejs %>
+<%- include ../../Partials/Navbar.ejs %>
+<%- include ../../Partials/Sidebar.ejs %>
+<main class="app-main"> <!--begin::App Content Header-->
+  <div class="app-content-header"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+              <div class="col-sm-6">
+                  <h3 class="mb-0">Nominal</h3>
+              </div>
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="/banks">Nominal</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Update</li>
+                  </ol>
+              </div>
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content Header--> <!--begin::App Content-->
+  <div class="app-content"> <!--begin::Container-->
+      <div class="container-fluid"> <!--begin::Row-->
+          <div class="row">
+            <div class="col-md-6"> <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+                    <div class="card-header">
+                        <div class="card-title">Payment Update</div>
+                    </div> <!--end::Header--> <!--begin::Form-->
+                    <form action="/payment/update/<%= payment._id %>?_method=PUT" method="POST"> <!--begin::Body-->
+                        <div class="card-body">
+                            <div class="form-group"> 
+                                <label for="type" class="form-label">Payment method</label> 
+                                <input type="text" class="form-control" name="type" id="type" value="<%= payment.type %>" required>
+            
+                                <label for="multiple-select-field" class="form-label">Bank</label>
+                                <div class="select2-purple">
+                                    <select multiple="multiple" class="form-control select2" id="multiple-select-field" name="banks" data-placeholder="Select bank" required>
+                                        <% banks.forEach(banks => { %>
+                                            <option value="<%= banks._id %>"
+                                                <% payment.banks.forEach(bank =>{ %>
+                                                    <% if(banks._id.toString() === bank._id.toString()){ %>
+                                                        selected
+                                                    <% } %>
+                                                <% }) %>
+                                                ><%= banks.name %> <%= banks.ownerName %> <%= banks.accNumber %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> <!--end::Body--> <!--begin::Footer-->
+                        <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+                    </form> <!--end::Form-->
+                </div> <!--end::Quick Example--> <!--begin::Input Group-->
+            </div> <!--end::Col--> <!--begin::Col-->  
+          </div> <!--end::Row-->
+      </div> <!--end::Container-->
+  </div> <!--end::App Content-->
+</main>
+<%- include ../../Partials/Footer.ejs %>
+<%- include ../../Partials/js.ejs %>

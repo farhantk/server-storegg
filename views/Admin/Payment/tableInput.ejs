@@ -1,0 +1,25 @@
+<div class="col-md-6"> <!--begin::Quick Example-->
+    <div class="card card-primary card-outline mb-4"> <!--begin::Header-->
+        <div class="card-header">
+            <div class="card-title">Payment Input</div>
+        </div> <!--end::Header--> <!--begin::Form-->
+        <form action="/payment" method="POST"> <!--begin::Body-->
+            <div class="card-body">
+                <div class="form-group"> 
+                    <label for="type" class="form-label">Paymen method</label> 
+                    <input type="text" class="form-control" name="type" id="type" required>
+
+                    <label for="multiple-select-field" class="form-label">Bank</label>
+                    <div class="select2-purple">
+                        <select multiple="multiple" class="form-control select2" id="multiple-select-field" name="banks" data-placeholder="Select bank" required>
+                            <% banks.forEach(bank => { %>
+                                <option value="<%= bank._id %>"><%= bank.name %> <%= bank.ownerName %> <%= bank.accNumber %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </div> <!--end::Body--> <!--begin::Footer-->
+            <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+        </form> <!--end::Form-->
+    </div> <!--end::Quick Example--> <!--begin::Input Group-->
+</div> <!--end::Col--> <!--begin::Col-->

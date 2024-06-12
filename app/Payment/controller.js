@@ -8,49 +8,56 @@ module.exports={
             const alertStatus = req.flash('alertStatus')
 
             const alert = {message: alertMessage, status: alertStatus}
-            const bank  = await Bank.find()
+            const payment  = await Payment.find().populate('banks')
+            const banks = await Bank.find()
 
-            console.log(alert)
-            res.render('Admin/Bank/index', {
-                bank,
+            res.render('Admin/Payment/index', {
+                name: req.session.user.name,
+                title: 'Payment',
+                payment,
+                banks,
                 alert
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/payment')
         }
     },
 
     view_update: async(req, res)=>{
         try {
             const {id} = req.params
-            const bank = await Bank.findOne({_id: id})
+            const payment = await Payment.findOne({_id: id})
+            const banks = await Bank.find()
 
-            res.render('Admin/Bank/update',{
-                bank
+            res.render('Admin/Payment/update',{
+                name: req.session.user.name,
+                title: 'Payment',
+                payment,
+                banks
             });
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/payment')
         }
     },
 
     actionCreate: async(req, res)=>{
         try {
-            const {name, ownerName, accNumber} = req.body
-            let bank = await Bank({name, ownerName, accNumber})
-            await bank.save()
+            const {type, banks} = req.body
+            let payment = await Payment({type, banks})
+            await payment.save()
 
-            req.flash('alertMessage', 'Add bank successfuly')
+            req.flash('alertMessage', 'Add payment method successfuly')
             req.flash('alertStatus', 'success')
 
-            res.redirect('/bank')
+            res.redirect('/payment')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/payment')
         }
     },
 
@@ -58,22 +65,22 @@ module.exports={
         try {
             
             const {id} = req.params
-            const {name, ownerName, accNumber} = req.body
+            const {type, banks} = req.body
 
             
-            let bank = await Bank.findOneAndUpdate({
+            let payment = await Payment.findOneAndUpdate({
                 _id: id
             },{
-                name, ownerName, accNumber
+                type, banks
             })
-            req.flash('alertMessage', 'Update bank successfuly')
+            req.flash('alertMessage', 'Update payment method successfuly')
             req.flash('alertStatus', 'success')
             
-            res.redirect('/bank')
+            res.redirect('/payment')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/payment')
         }
     },
 
@@ -81,15 +88,15 @@ module.exports={
         try {
             
             const {id} = req.params
-            let bank = await Bank.findOneAndDelete({_id:id})
+            let payment = await Payment.findOneAndDelete({_id:id})
 
-            req.flash('alertMessage', 'Remove bank successfuly')
+            req.flash('alertMessage', 'Remove payment method successfuly')
             req.flash('alertStatus', 'success')
-            res.redirect('/bank')
+            res.redirect('/payment')
         } catch (err) {
             req.flash('alertMessage', `${err.message}`)
             req.flash('alertStatus', 'danger')
-            res.redirect('/bank')
+            res.redirect('/payment')
         }
     },
 
