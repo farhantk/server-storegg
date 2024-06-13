@@ -8,6 +8,8 @@ var methodOverride = require('method-override')
 var session = require('express-session')
 var flash = require('connect-flash');
 const bodyParser = require('body-parser');
+var cors = require('cors')
+
 
 var DashboardRouter = require('./app/Dashboard/router');
 var CategoryRouter = require('./app/Category/router');
@@ -24,7 +26,7 @@ var AuthRouter = require('./app/Auth/router');
 
 var app = express();
 const URL = `/api/v1`
-
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

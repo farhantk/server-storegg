@@ -60,8 +60,6 @@ module.exports={
     signIn: async (req, res) => {
         try {
             const { email, password } = req.body;
-            console.log('>>>>>');
-            console.log(req.body);
     
             const player = await Player.findOne({ email: email });
             if (player) {
